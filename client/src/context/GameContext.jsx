@@ -1,10 +1,13 @@
-import React, { createContext, useContext, useEffect, useState, useRef } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
 const GameContext = createContext(null);
 
 export function GameProvider({ children }) {
-  const socketRef = useRef(null);
+  // Lazy-initialize socket so it's available immediately (not null before connect fires)
+  const [socket] = useState(() =>
+    io(process.env.REACT_APP_SOCKET_URL || 'http://localhost:5000')
+  );
   const [gameState, setGameState] = useState(null);
   const [playerName, setPlayerName] = useState('');
   const [playerId, setPlayerId] = useState('');
@@ -13,9 +16,6 @@ export function GameProvider({ children }) {
   const [roundScores, setRoundScores] = useState(null);
 
   useEffect(() => {
-    const socket = io(process.env.REACT_APP_SOCKET_URL || 'http://localhost:5000');
-    socketRef.current = socket;
-
     socket.on('connect', () => {
       setPlayerId(socket.id);
     });
@@ -39,9 +39,7 @@ export function GameProvider({ children }) {
     return () => {
       socket.disconnect();
     };
-  }, []);
-
-  const socket = socketRef.current;
+  }, [socket]);
 
   return (
     <GameContext.Provider

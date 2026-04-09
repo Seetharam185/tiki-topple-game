@@ -14,17 +14,6 @@ const TIKI_COLORS = {
   9: 'bg-indigo-500',
 };
 
-const TIKI_TEXT_COLORS = {
-  1: 'text-red-700',
-  2: 'text-blue-700',
-  3: 'text-green-700',
-  4: 'text-yellow-700',
-  5: 'text-purple-700',
-  6: 'text-orange-700',
-  7: 'text-pink-700',
-  8: 'text-teal-700',
-  9: 'text-indigo-700',
-};
 
 export default function GameBoard() {
   const { socket, gameState, playerId, error, setError } = useGame();

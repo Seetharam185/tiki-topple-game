@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useGame } from '../context/GameContext';
 
 export default function HomePage() {
-  const { socket, setPlayerName, playerName, error, setError } = useGame();
+  const { socket, setPlayerName, error, setError } = useGame();
   const [nameInput, setNameInput] = useState('');
   const [maxPlayers, setMaxPlayers] = useState(2);
   const [joinCode, setJoinCode] = useState('');
