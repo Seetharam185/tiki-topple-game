@@ -97,7 +97,7 @@ export default function GameBoard() {
           <span className="font-bold text-lg">⭐ Your Turn!</span>
         ) : (
           <span className="font-semibold">
-            <span className="text-orange-500">⏳</span> {currentPlayerName}&apos;s turn
+            <span className="text-orange-500">⏳</span> {currentPlayerName}'s turn
           </span>
         )}
       </div>

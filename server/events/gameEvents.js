@@ -228,8 +228,7 @@ function registerGameEvents(io, socket) {
     if (!room || room.hostId !== socket.id) return;
 
     if (room.isFinalRound && room.status === 'scoring') {
-      // The isFinalRound flag was set after last regular round — now start tiebreaker
-      // Keep isFinalRound = true so after THIS round we set ended
+      // isFinalRound stays true so playerMove knows to set status='ended' after this round ends
     }
 
     room.tikiOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9];

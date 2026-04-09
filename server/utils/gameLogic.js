@@ -41,10 +41,14 @@ function calculateScores(players, tikiOrder, playerObjectives) {
 }
 
 function assignObjectives(players, tikiIds) {
-  const shuffled = [...tikiIds].sort(() => Math.random() - 0.5);
   const objectives = {};
-  players.forEach((player, i) => {
-    objectives[player.id] = shuffled.slice(i * 3, i * 3 + 3);
+  players.forEach((player) => {
+    const shuffled = [...tikiIds];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    objectives[player.id] = shuffled.slice(0, 3);
   });
   return objectives;
 }
