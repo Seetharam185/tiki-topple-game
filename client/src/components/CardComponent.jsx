@@ -17,7 +17,6 @@ const CARD_INFO = {
 export default function CardComponent({ card, selected, disabled, onClick }) {
   const info =
     CARD_INFO[card.type]?.[card.amount] ||
-    CARD_INFO[card.type]?.['null'] ||
     CARD_INFO[card.type]?.[null] ||
     { icon: '❓', name: card.type, desc: '', hint: '' };
 

@@ -195,6 +195,9 @@ function registerGameEvents(io, socket) {
         isFinalRound: room.isFinalRound,
       };
 
+      // Emit endRound before mutating status so clients land on score screen first
+      io.to(room.code).emit('endRound', endRoundPayload);
+
       // Determine if game is truly over
       if (room.isFinalRound) {
         // Tiebreaker just finished → end game
@@ -212,7 +215,6 @@ function registerGameEvents(io, socket) {
         }
       }
 
-      io.to(room.code).emit('endRound', endRoundPayload);
       io.to(room.code).emit('updateState', room);
       return;
     }
